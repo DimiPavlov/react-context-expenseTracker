@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { AddTransaction } from "./components/AddTransaction";
+import { Balance } from "./components/Balance";
+import { ExpenseContainer } from "./components/ExpenseContainer";
+import { Header } from "./components/Header";
+import { TransactionHistory } from "./components/TransactionHistory";
+// import { GlobalProvider } from "./context/GlobalState";
+import { createStore } from "@reatom/core";
+import { context } from "@reatom/react";
 
 function App() {
+  const store = createStore();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <context.Provider value={store}>
+      {/* <GlobalProvider> */}
+      <Header />
+      <div className="container">
+        <Balance />
+        <ExpenseContainer />
+        <TransactionHistory />
+        <AddTransaction />
+      </div>
+      {/* </GlobalProvider> */}
+    </context.Provider>
   );
 }
 
